@@ -1,10 +1,10 @@
 
 # hscript
 
+[![Build Status][travis-image]][travis-url]
 [![NPM version][npm-image]][npm-url]
 [![Dependency Status][david-image]][david-url]
 [![License][license-image]][license-url]
-[![Build Status][travis-image]][travis-url]
 
 Cli for converting html to hyperscript and the other way around.
 
@@ -57,5 +57,5 @@ npm test
 [license-image]: http://img.shields.io/npm/l/hscript.svg?style=flat-square
 [license-url]: ./license
 
-[travis-image]: https://travis-ci.org/queckezz/hscript.png
+[travis-image]: https://img.shields.io/travis/queckezz/hscript.svg?style=flat-square
 [travis-url]: https://travis-ci.org/queckezz/hscript
