@@ -1,0 +1,80 @@
+#!/usr/bin/env node
+
+var stringify = require('virtual-dom-stringify')
+var _toHyperscript = require('virtual-dom/h')
+var _toHtml = require('html2hscript')
+var parse = require('minimist')
+var help = require('show-help')
+var slice = require('sliced')
+var Path = require('path')
+var Fs = require('mz/fs')
+var Vm = require('vm')
+
+var stdout = console.log
+
+main(process.argv)
+
+function main (args) {
+  var argv = parse(slice(args, 2))
+  var file = argv._[0]
+
+  if(argv.help || argv.h) return help();
+
+  if (!file) {
+    return argv.html
+      ? hyperscript(stdin())
+      : html(stdin())
+  }
+
+  var path = Path.resolve(file)
+  var input = Fs.readFile(path, 'utf-8')
+
+  Path.extname(path) == '.html'
+    ? html(input)
+    : hyperscript(input)
+}
+
+function html (input) {
+  input
+    .then(toHtml)
+    .then(stdout)
+}
+
+function hyperscript (input) {
+  input
+    .then(toHyperscript)
+    .then(stdout)
+}
+
+function stdin () {
+  return new Promise(function (fulfill, reject) {
+    process.stdin.setEncoding('utf8')
+    var buf = ''
+
+    process.stdin.on('readable', function() {
+      var chunk = process.stdin.read()
+      
+      if (!chunk) fulfill(buf)
+      buf += chunk
+    })
+  })   
+}
+
+function toHtml (contents) {
+  return new Promise(function (fullfill, reject) {
+    _toHtml(contents, function (err, res) {
+      if (err) reject(err);
+      fullfill(res)
+    })
+  })
+}
+
+function toHyperscript(src) {
+  var ctx = Vm.createContext({
+    h: _toHyperscript,
+    module: new module.constructor()
+  })
+  
+  var vdom = Vm.runInContext('module.exports = ' + src, ctx)
+  return stringify(vdom)
+}

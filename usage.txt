@@ -1,0 +1,20 @@
+
+Examples:
+  Cli:
+    html -> hyperscript:
+    hscript index.html
+
+    hyperscript -> html:
+    hscript index.js
+
+
+  Stdin:
+    html -> hyperscript
+    echo '<div>text<div/>' | hscript
+
+    hyperscript -> html
+    echo 'h("div", ["text"])' | hscript --html
+
+Options:
+  --help, -h
+  Show help
