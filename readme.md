@@ -32,3 +32,9 @@ $ echo "<div>text<div/>" | hscript
 $ echo "h('div', ['text'])" | hscript --html
 # -> <div>text<div/>
 ```
+
+## Run tests
+
+```
+npm test
+```
