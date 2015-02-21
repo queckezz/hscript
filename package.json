@@ -1,7 +1,7 @@
 {
   "name": "hscript",
   "description": "Cli for converting html to hyperscript and the other way around",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "preferGlobal": true,
   "repository": "https://github.com/queckezz/hscript",
   "bin": "./bin/hscript",
