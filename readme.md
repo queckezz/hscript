@@ -1,12 +1,12 @@
 
 # hscript
 
-Cli for converting `html <-> hyperscript`.
+Cli for converting html to hyperscript and the other way around.
 
 ## Installation
 
 ```sh
-$ npm install hscript
+$ npm install -g hscript
 ```
 
 ## Usage
